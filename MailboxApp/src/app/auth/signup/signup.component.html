@@ -1,0 +1,74 @@
+<div class="main">
+    <div class="text-center bg-light">
+      <p class="login-text">Register User</p>
+    </div>
+    <!-- "id": 0,
+  "email": "string",
+  "phoneNumber": "string",
+  "location": "string",
+  "password": "string",
+  "userNamee": "string" -->
+  <ng-container *ngIf="isRegisterDivShow">    
+  <div class="d-flex justify-content-center" >
+      <div class="content_area mt-3 mb-4">
+        <div class="form-group">
+          <label class="label_style">Email</label>
+          <input type="text" class="form-control mt-2" placeholder="Email" [(ngModel)]="usersingUp.email" (keyup.enter)="SignUp()"/>
+        </div>
+  
+        <div class="form-group mt-3">
+          <label class="label_style">Password</label>
+          <input type="password" class="form-control mt-2" placeholder="Password" [(ngModel)]="usersingUp.password" (keyup.enter)="SignUp()"/>
+        </div>
+        <div class="form-group mt-3">
+            <label class="label_style">phoneNumber</label>
+            <input type="number" class="form-control mt-2" placeholder="phoneNumber" [(ngModel)]="usersingUp.phoneNumber" (keyup.enter)="SignUp()"/>
+          </div>
+          <div class="form-group mt-3">
+            <label class="label_style">location</label>
+            <input type="text" class="form-control mt-2" placeholder="location" [(ngModel)]="usersingUp.location" (keyup.enter)="SignUp()"/>
+          </div>
+          <div class="form-group mt-3">
+            <label class="label_style">userNamee</label>
+            <input type="text" class="form-control mt-2" placeholder="userNamee" [(ngModel)]="usersingUp.userNamee" (keyup.enter)="SignUp()"/>
+          </div>
+        <!-- <div class="form-group mt-3">
+          <label class="label_style">Role</label>
+          <select class="form-control mt-2" [(ngModel)]="userLogin.role" (keyup.enter)="Login()">
+            <option *ngFor="let roleKey of keys(loginRole)" [value]="roleKey">{{ loginRole[roleKey] }}</option>
+          </select>
+        </div> -->
+  
+        <div class="text-center">
+          <button type="submit" (click)="SignUp()" class="btn btn_submit mt-4">
+            <div class="button-text">SignUp</div>
+          </button>
+        </div>
+        <div class="mt-4 text-center">
+          <p class="not-member">
+            Already a member?
+            <span><a [routerLink]="['/']">Login</a></span>
+          </p>
+        </div>
+      </div>
+    </div>
+</ng-container>
+<ng-container *ngIf="isConfirmationCOdeDiveShow">
+    <div class="d-flex justify-content-center" >
+        <div class="content_area mt-3 mb-4"> 
+            <div class="form-group mt-3">
+                <label class="label_style">Please Check Your Email Address </label>
+                <br>
+                <label class="label_style">Confirmation Code:</label>
+                <input type="text" class="form-control mt-2" placeholder="xas24d.." [(ngModel)]="ConfirmationCode" (keyup.enter)="SignUpWithCOnfirmationCode()"/>
+              </div>
+              <div class="text-center">
+                <button type="submit" (click)="SignUpWithCOnfirmationCode()" class="btn btn_submit mt-4">
+                  <div class="button-text">Confirm</div>
+                </button>
+              </div>
+        </div>
+    </div>
+</ng-container>  
+  </div>
+  

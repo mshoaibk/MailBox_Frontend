@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="w-100 d-flex">
+    <!-- Left-side panel -->
+    <div class="left-side flex-column p-3 bg-light">
+      <button type="button" class="btn btn-primary btn-sm mb-3" data-toggle="modal" data-target="#EmailCompose">Compose</button>
+      <div class="d-flex w-100 justify-content-between p-2">
+        <ul class="nav nav-tabs flex-column w-100">
+          <li class="nav-item">
+            <a data-toggle="tab" class="nav-link w-100 d-flex justify-content-between" href="#inbox">
+              <div class="text-dark d-flex align-items-center">
+                <span><i class="far fa-envelope pr-2"></i></span>
+                <span>Inbox</span>
+              </div>
+              <div class="count">3</div>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a data-toggle="tab" class="nav-link" href="#sent">
+              <div class="text-dark d-flex align-items-center">
+                <span><i class="far fa-envelope pr-2"></i></span>
+                <span>Sent</span>
+              </div>
+            </a>
+          </li>
+          <li *ngIf="userAcesse" class="nav-item">
+            <a [routerLink]="['/app-user-management']" class="nav-link">Go to User Management</a>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-danger" (click)="Logut()" class="nav-link">Logout</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  
+    <!-- Right-side content area -->
+    <div class="right-side p-3">
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text"><i class="fas fa-search"></i></span>
+        </div>
+        <input type="text" class="form-control" placeholder="Search email">
+      </div>
+      <hr class="m-0">
+      <div class="tab-content">
+        <div id="inbox" class="tab-pane fade in active">
+          <app-inbox></app-inbox>
+        </div>
+        <div id="sent" class="tab-pane fade">
+          <app-sentbox></app-sentbox>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Email Compose Modal -->
+<div class="modal fade" id="EmailCompose" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Mail</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="mailto:recipient@example.com" method="post" enctype="text/plain">
+          <label for="subject">To:</label>
+          <input type="text" id="subject" name="subject" class="form-control mb-3" placeholder="To: ayz@gmail.com" [(ngModel)]="message.Toemail" (keyup.enter)="Send()">
+          <label for="subject">Subject:</label>
+          <input type="text" id="subject" name="subject" class="form-control mb-3" placeholder="Title..." [(ngModel)]="message.Subject" (keyup.enter)="Send()">
+          <label for="body">Message:</label>
+          <textarea id="body" name="body" rows="6" class="form-control mb-3" placeholder="Write your message here" [(ngModel)]="message.mailbody" (keyup.enter)="Send()"></textarea>
+          <div class="text-center">
+            <button type="button" class="btn btn-primary" (click)="Send()" data-dismiss="modal">Send</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

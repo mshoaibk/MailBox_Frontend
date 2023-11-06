@@ -1,0 +1,105 @@
+<div class="container">
+    <div class="row mt-4">
+      <div class="col-6">
+        <a [routerLink]="['/home']" class="btn btn-secondary">Back</a>
+      </div>
+      <div class="col-6 text-right">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#AddUserModal" (click)="clearmodal()">Add User</button>
+      </div>
+    </div>
+  </div>
+  <!-- Modal -->
+  <div class="modal fade" id="AddUserModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Add/Update User</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+  
+        <div class="modal-body">
+          <form  >
+            <input type="hidden" name="id" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.id">
+            <div class="form-group">
+              <label for="email">Email:</label>
+              <input type="text" id="email" name="email" class="form-control" placeholder="Email" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.email">
+            </div>
+            <div class="form-group">
+              <label for="UserNamee">Username:</label>
+              <input type="text" id="UserNamee" name="UserNamee" class="form-control" placeholder="Username" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.UserNamee">
+            </div>
+            <div class="form-group">
+              <label for="phoneNumber">Phone Number:</label>
+              <input type="text" id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Phone Number" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.phoneNumber">
+            </div>
+            <div class="form-group">
+              <label for="location">Location:</label>
+              <input type="text" id="location" name="location" class="form-control" placeholder="Location" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.location">
+            </div>
+            <div class="form-group">
+              <label for="password">Password:</label>
+              <input type="text" id="password" name="password" class="form-control" placeholder="Password" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.password">
+            </div>
+            <div class="form-group">
+              <label for="role">Role:</label>
+              <select class="form-control" name="role" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.role">
+                <option *ngFor="let i of roles" [value]="i">{{i}}</option>
+              </select>
+            </div>
+            <div class="form-check">
+              <input type="checkbox" class="form-check-input" id="isActive" name="isActive" [ngModelOptions]="{ standalone: true }" [(ngModel)]="User.isActive">
+              <label class="form-check-label" for="isActive">Is Active</label>
+            </div>
+            <div class="text-center">
+              <button type="submit" (click)="AddUpdate()" class="btn  btn-primary" data-dismiss="modal">Save</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="container-fluid">
+    <div class="row justify-content-center">
+      <h1>Users</h1>
+    </div>
+    <table class="table table-bordered table-striped table-hover">
+      <thead class="thead-dark">
+        <tr>
+          <th></th>
+          <th>ID</th>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Location</th>
+          <th>Phone Number</th>
+          <th>Role</th>
+          <th>Active</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of userList">
+          <td>
+            <img [src]="item.photoPath || 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHwAAAB8CAMAAACcwCSMAAAAYFBMVEX///8AAADt7e0wMDB/f3+CgoL5+fl7e3vQ0NCoqKhmZmZVVVUfHx/Y2NheXl64uLhxcXGMjIwnJydMTEyTk5NFRUXh4eHIyMgKCgqZmZnz8/M/Pz+hoaE2NjYTExOwsLAV7jEDAAACyElEQVRoge2bi3aqMBBFCSrii6eCotb//8uKoKWKkDk54O1d2R/QvcBkmJxJHccUP/66GP8RiOw0UWq/+YDZDVdf6spqfPVmmqiKaGSzt0jVg3Gf3I/ULxajmYvLRD2zHGfJZXHyoi7ZbX13YLUf7VvVNybBIvMGU2+C9+aa9DDM87vLXvWNaAD9Qk9dcmK7p/pupeZcd9RvbLJkurcyt1Ixz+1L3UrlLLf3WtJ6SVg7Xr/xndmfs/jJL2wVco8zR2qL5Js6cVTVxuoxRfVE70jLr7VeeS5EyjZGzT66DKJJ5fkE0X7KnuYwkLkymfNjJz56k0M5T2KtQK+euLKMijQ6zzNUuf1knWzRzX8LzB3Gvay+DzG+WvnqL5R3LL2Dc3kzj3L7Szj3z1+Gm5Vni+rzziuTkzxyi8z67Y/djSTBZjFLiT+LIT5m0zzCkbTkzi+d0c5rySUzryS5zr7bMzxbkDzLSADz7kzy7jkzzrUzrrU5z7n5zrr/S3TtF3Tkzy7nHl8CCE4IvSYvSfGz1WjyUSfCSvTO8X+SfcSvTLkj3PzkjTPzkj1/9k7n/rkDXJz3XH8vSfr8vTrU8vSf8z1X/+kDXr/skDfJzkT/EsDfDzT+T8X/E8DfTzTzjST/ESD/3K7zkjTPz7Dzj7z3P/kD/3D7T/TKS/X7Dzr8z1D/7D3PzjSTz7D/3K8zjST/3DzjSTzkjT/7D4vSfrzr8z1zjSTzr7D/TKS/DzT/3L/zzjSTzkjT/3LzjSTzr7D/3L7zkjT/TKS/TzjSTzjzjSTzjzjSTzr7T/TKS/3zjSTzjzjSTzjzjSTzr8L7HkDzvSvDOVj6tSjeYjkDAF4CT3BQXu4CQAAAAASUVORK5CYII='"
+                 alt="User Photo" class="img-thumbnail rounded-circle" style="max-width: 50px; max-height: 50px;">
+          </td>
+          <td>{{ item.id }}</td>
+          <td>{{ item.userNamee }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.location || 'N/A' }}</td>
+          <td>{{ item.phoneNumber || 'N/A' }}</td>
+          <td>{{ item.role || 'N/A' }}</td>
+          <td>
+            <span class="badge badge-{{ item.isActive ? 'success' : 'danger' }}">{{ item.isActive ? 'Active' : 'Inactive' }}</span>
+          </td>
+          <td>
+            <button class="btn btn-info" (click)="EditUser(item)" data-toggle="modal" data-target="#AddUserModal">Edit</button>
+            <button class="btn btn-danger" (click)="DeleteUser(item.id)">Delete</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

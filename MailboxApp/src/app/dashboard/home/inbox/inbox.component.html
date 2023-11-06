@@ -1,0 +1,49 @@
+<!-- <table class="table table-bordered table-striped table-hover">
+    <thead class="thead-dark">
+      <tr>
+        <th>Photo</th>
+        <th>Box ID</th>
+        <th>User Name</th>
+        <th>Sender ID</th>
+        <th>Last Email Title</th>
+        <th>Last Email</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of signalRService.inboxList">
+        <td>
+          <img [src]="item.photoPath || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl1czU01IEVg7d7onvUWiGEsMcg5lCM7VXXskMI215Ug&s'"
+               alt="User Photo" class="img-thumbnail rounded-circle" style="max-width: 50px; max-height: 50px;">
+        </td>
+        <td>{{ item.boxId }}</td>
+        <td>{{ item.userName }}</td>
+        <td>{{ item.senderId }}</td>
+        <td>{{ item.lastEmailTitle || 'N/A' }}</td>
+        <td>{{ item.lastEmailBody || 'N/A' }}</td>
+      </tr>
+    </tbody>
+  </table>
+   -->
+   <div class="container">
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="email-list">
+          <div *ngFor="let item of signalRService.inboxList" class="email">
+            <div class="email-header">
+              <img [src]="item.photoPath || 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl1czU01IEVg7d7onvUWiGEsMcg5lCM7VXXskMI215Ug&s'"
+                alt="User Photo" class="user-avatar">
+              <div class="email-info">
+                <div class="user-name">{{ item.userName }}</div>
+                <div class="email-subject">{{ item.lastEmailTitle || 'No Subject' }}</div>
+              </div>
+            </div>
+            <div class="email-body">
+              {{ item.lastEmailBody || 'No Content' }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
